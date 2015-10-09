@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM daocloud.io/ubuntu
 MAINTAINER Fang Liang <hustnaive@me.com>
 
 #国内使用163的镜像源以加速
