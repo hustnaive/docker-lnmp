@@ -8,10 +8,10 @@ server {
 
     listen 80;
     index index.html index.htm index.php;
-    root  /var/www/site;
+    root  /var/www/web;
     charset utf-8;
  
-    #access_log  /var/log/nignx/site-access.log;
+    #access_log  /var/log/nignx/web-access.log;
     #error_page  404              /404.html;
  
     # redirect server error pages to the static page /50x.html

@@ -14,6 +14,7 @@ RUN apt-get install -y php5-memcache
 RUN apt-get install -y php5-mysql
 RUN apt-get install -y php5-mysqlnd
 RUN apt-get install -y php5-curl
+RUN apt-get install -y php5-gd
 
 RUN apt-get install -y openssh-server
 RUN mkdir -p /var/run/sshd
@@ -22,19 +23,16 @@ RUN echo "root:123456" | chpasswd
 
 #将一些配置初始化
 ADD nginx-conf /etc/nginx/nginx.conf
-ADD nginx-site /etc/nginx/sites-available/default
+ADD nginx-site /etc/nginx/sites-available/site
 WORKDIR /etc/nginx/sites-enabled/
-RUN ln -sf /etc/nginx/sites-available/default ./default
+RUN ln -sf /etc/nginx/sites-available/site ./default
 
 #将测试文件拷贝到网站根目录
-RUN mkdir /var/www && mkdir /var/www/site
-ADD phpinfo.php /var/www/site/phpinfo.php
+RUN mkdir /var/www && mkdir /var/www/web
+ADD phpinfo.php /var/www/web/phpinfo.php
 
-RUN /etc/init.d/nginx restart
-RUN /etc/init.d/php5-fpm restart
-RUN /etc/init.d/memcached restart
 
-ADD ./start.sh /start.sh
+ADD start.sh /start.sh
 RUN chmod 755 /start.sh
 
 # Expose Ports
